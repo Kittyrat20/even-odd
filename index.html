@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>evenoddgame</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>
+    let wins = 0
+    let losses = 0
+    let playerchoice
+    let numbresult
+    let evenness
+    let victory
+    let continuePlaying = true
+
+    let uname = prompt(`Welcome to the Even/Odd Gussing Game! Please enter your name to get started: `);
+
+    function playagain() {
+        let playAgain = prompt(`${uname}, you chose ${playerchoice}, the sum was ${numbresult}, which is an ${evenness ? "even" : "odd"} number. You ${victory ? "Win" : "Lose"}!\n That's ${wins} wins and ${losses} losses! \nWould you like to play again? y/n`)
+        if (playAgain == `y`) {
+            continuePlaying = true;
+        }
+        else if (playAgain == `n`) {
+            continuePlaying = false;
+        }
+        else {
+            alert(`Please enter "y" or "n".`)
+            playagain()
+        }
+    }
+    function inputchecker() {
+        playerchoice = prompt(`Call it! Even or Odd?`)
+        playerchoice = playerchoice.toLowerCase();
+        let playerchoicebool = false
+        if (playerchoice == `even`) {
+            playerchoicebool = true
+        }
+        else if (playerchoice == `odd`) {
+            playerchoicebool = false
+        }
+        else {
+            alert(`Please choose "even" or "odd".`)
+            playerchoicebool = inputchecker()
+        }
+        return playerchoicebool;
+    }
+
+    while (continuePlaying) {
+        playerchoicebool = inputchecker()
+
+        alert(`3`);
+        alert(`2`);
+        alert(`1`);
+        let compnumber = 1 + Math.floor(Math.random() * 3);
+        let playernumber = 1 + Math.floor(Math.random() * 3);
+        numbresult = (playernumber + compnumber);
+
+        evenness = numbresult % 2 == 0
+
+        victory = evenness == playerchoicebool
+        if (victory) {
+            wins++
+        }
+        else {
+            losses++
+        }
+
+        playagain()
+    }
+
+    
+</script>
+
+</body>
+<footer>
+    <meta name="author" content="Harrison P.">
+</footer>
+</html>
